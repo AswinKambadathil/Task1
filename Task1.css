@@ -233,7 +233,7 @@
     } */
 }
 }
-@media screen and (max-width:430px) {
+/* @media screen and (max-width:430px) {
     .blue{
         display: grid;
         grid-template-columns: repeat(8, 1fr);
@@ -249,5 +249,5 @@
         flex-direction: column;
         width: fit-content;
     }
-} 
+}  */
 
