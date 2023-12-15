@@ -27,8 +27,16 @@
     gap: 20px;
     padding-top: 10px;
 }
-.tier1,.tier2,.tier3{
+.tiername{
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 90px;
+}
+.seat{
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -42,27 +50,30 @@
 }   
 .blue{
     display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
     cursor: pointer;
 }
 .box1{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: rgb(123, 149, 233);
     border-radius: 5px;
+    text-align: center;
 }
 .box2{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: rgb(211, 123, 233);
     border-radius: 5px;
+    text-align: center;
 }
 .box3{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: rgb(218, 233, 123);
     border-radius: 5px;
+    text-align: center;
 }
 .side{
     background-color: rgb(219, 77, 77);
@@ -88,7 +99,7 @@
     color: white;
 }
 .summary-content{
-    width: 92%;
+    width: 90%;
     background-color: white;
     padding: 15px;
     border-radius: 15px;
@@ -100,7 +111,7 @@
 }
 .discount,.total
 {
-    width: 92%;
+    width: 90%;
     background-color: #fff;
     padding: 15px;
     display: flex;
@@ -130,7 +141,7 @@
     justify-content: space-between;
 }
 .payable{
-    width: 92%;
+    width: 90%;
     background-color: white;
     padding: 15px;
     display: flex;
@@ -160,41 +171,35 @@
     text-align: center;
     color:#ea5455 ;
 }
-.tier .box1:hover{
-    background-color: gray;
-}
-.tier .box2:hover{
-    background-color: gray;
-}
-.tier .box3:hover{
+.box1:hover,.box2:hover,.box3:hover{
     background-color: gray;
 }
 @media screen and (max-width:1400px) {
     .box1{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
     .box2{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
     .box3{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     } 
 }
 @media screen and (max-width:1180px) {
     .box1{
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 42px;
     }
     .box2{
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 42px;
     }
     .box3{
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 42px;
     } 
     .headerpart{
         width: 80%;
@@ -210,44 +215,75 @@
         width: 85%;
         margin-left: 35px;
 }
-@media screen and (max-width:687px) {
+@media screen and (max-width:625px) {
     .blue{
         display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        gap: 10px;
-    }
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+    } 
     .main{
         flex-direction: column;
-        width: fit-content;
     }
-    /* .summary-wrap{
-        width: 85%;
-        margin-left: 35px;
+     .summary-wrap{
+        width: 100%;
+        margin-left: 10px;
+    }
+    .seat{
+        width: max-content;
+    }
+    .main{
+        align-items: center;
     }
     .headerpart{
-        width: 80%;
-        margin-left: 35px;
+        width: 90%;
+        margin-left: 45px;
     }
     .tier{
         width: 80%;
-    } */
-}
-}
-@media screen and (max-width:430px) {
-    .blue{
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        gap: 10px;
-    }
-    .summary-wrap{
-        margin-left: 25px;
-    }
-    .headerpart{
-        margin-left: 45px;
-    }
-    .main{
+    } 
+    .tiername{
+        display: flex;
         flex-direction: column;
-        width: fit-content;
+        justify-content: space-between;
+        height: 100%;
+        margin-top: 40px;
+        gap: 180px;
     }
-} 
-
+    .payable{
+        width: 88%;
+        background-color: white;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap:10px;
+        margin-top: 8px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .summary-content{
+        width: 88%;
+        background-color: white;
+        padding: 15px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .discount,.total
+    {
+        width: 88%;
+        background-color: #fff;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap:10px;
+        margin-top: 8px;
+    }
+}
+}

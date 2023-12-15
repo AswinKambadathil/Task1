@@ -1,64 +1,75 @@
-const jsonData={
-    "coupon":
-        [{"discount":"10%","couponName":"MAX10"},   
-        {"discount":"20%","couponName":"SUPER10"}],
-    "seats":
-        [{"name":"Tier 1","seats":30,"price":200},
-        {"name":"Tier 2","seats":20,"price":400},
-        {"name":"Tier 3","seats":10,"price":700}]}
+let url = "https://json.onnetsystems.dev/bins?id=k99tKipKD";
+fetch(url)
+  .then((data) => data.json())
+  .then((data) => {
+    let jsonData = data;
 
-const tier1Object=jsonData.seats.find(seats=> seats.name==="Tier 1");
-const numberOfSeatsInTier1 = tier1Object ? tier1Object.seats : null;
+    // const couponUsed = jsonData.coupon.find((discount) => coupon.couponName == couponNameUsed)
+    // const couponDiscount = couponUsed ? couponUsed.discount : 0;
 
-document.addEventListener('DOMContentLoaded', function() {
-    addSquares(numberOfSeatsInTier1);
-});
+    addSquares("Tier 1", "box1", "A", "price1", "tier1num");
+    addSquares("Tier 2", "box2", "B", "price2", "tier2num");
+    addSquares("Tier 3", "box3", "C", "price3", "tier3num");
 
+    function addSquares(tierName, cls, numb, priceId, tierNumId) {
+      var container = document.querySelector('.blue');
+      const tierObject = jsonData.seats.find((seats) => seats.name === tierName);
+      const numberOfSeats = tierObject ? tierObject.seats : 0;
+      const tierPrice = tierObject ? tierObject.price : 0;
 
-function addSquares(numberOfSeatsInTier1) {
-    var container = document.querySelector('.box1');
-
-    for (var i = 0; i < numberOfSeatsInTier1; i++) {
-        var square = document.createElement('div');
-        square.className = 'square';
+      for (var i = 0; i < numberOfSeats; i++) {
+        let square = document.createElement('div');
+        square.className = cls;
+        square.innerText = `${numb} ${i + 1}`;
+        square.dataset.price = tierPrice;
         container.appendChild(square);
+        square.addEventListener('click', () => changeColor(square, tierNumId,cls));
+      }
+
+      document.getElementById(priceId).innerText = `${tierPrice}`;
     }
-}
-// const tier1Object=jsonData.seats.find(seats=> seats.name==="Tier 2");
-// const numberOfSeatsInTier2 = tier1Object ? tier1Object.seats : null;
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     addSquares(numberOfSeatsInTier2);
-// });
+    function changeColor(square, tierNumId,cls) {
+      if (square.style.backgroundColor === 'green') {
+        square.style.backgroundColor = '';
+      } else {
+        square.style.backgroundColor = 'green';
+      }
 
+      updateTotalPrice();
+      updateTierSeatCount(tierNumId,cls);
+    }
 
-// function addSquares(numberOfSeatsInTier2) {
-//     var container = document.querySelector('.box2');
+    function updateTierSeatCount(tierNumId) {
+      const greenSquares = document.querySelectorAll(`[style="background-color: green;"]`);
+      let box1Count = 0, box2count = 0 , box3count = 0 
+      greenSquares.forEach(element => {
+        if (element.classList.contains('box1')) {
+          box1Count++;
+          document.getElementById(tierNumId).innerText = box1Count;
+        } else if (element.classList.contains('box2')) {
+          box2count++;
+          document.getElementById(tierNumId).innerText = box2count;
+        } else if (element.classList.contains('box3')) {
+          box3count++;
+          document.getElementById(tierNumId).innerText = box3count;
+        }
+      });
+      
+      
+      console.log(greenSquares,greenSquares.length);
+    }
 
-//     for (var i = 0; i < numberOfSeatsInTier2; i++) {
-//         var square = document.createElement('div');
-//         square.className = 'square';
-//         container.appendChild(square);
-//     }
-// }
-// const tier1Object=jsonData.seats.find(seats=> seats.name==="Tier 3");
-// const numberOfSeatsInTier3 = tier1Object ? tier1Object.seats : null;
+    function updateTotalPrice() {
+      var totalPrice = 0;
+      var greenSquares = document.querySelectorAll('.blue div[style="background-color: green;"]');
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     addSquares(numberOfSeatsInTier3);
-// });
+      greenSquares.forEach(function (square) {
+        const tierPrice = parseInt(square.dataset.price);
+        totalPrice += tierPrice;
+      });
 
-
-// function addSquares(numberOfSeatsInTier3) {
-//     var container = document.querySelector('.box3');
-
-//     for (var i = 0; i < numberOfSeatsInTier3; i++) {
-//         var square = document.createElement('div');
-//         square.className = 'square';
-//         container.appendChild(square);
-//     }
-// }
-// function changeBlock() {
-//     var block = document.getElementById('myBlock');
-//     block.style.backgroundColor = 'lightgreen';
-// }
+      document.getElementById('totalPrice').innerText = `${totalPrice}`;
+    }
+  })
+  .catch((error) => console.log(error));
